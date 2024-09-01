@@ -2,21 +2,20 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         int N = nums.size();
-        // To find the missing number, check if all numbers from 0 to N are present
-        for (int i = 0; i <= N; i++) {
-            bool found = false;
-            // Search the element using linear search
-            for (int j = 0; j < N; j++) {
-                if (nums[j] == i) {
-                    found = true;
-                    break;
-                }
-            }
-            // Check if the element is missing
-            if (!found)
-                return i;
+        vector<int> hash(N + 1, 0);  // Initialize a vector with size N + 1, all values set to 0
+
+        // Fill the hash vector based on the input array
+        for (int i = 0; i < N; i++) {
+            hash[nums[i]]++;
         }
-        // Return -1 as a fallback in case no number is missing, but theoretically, this should not happen
-        return -1;
+
+        // Find the missing number by checking which index has a count of 0
+        for (int i = 0; i <= N; i++) {
+            if (hash[i] == 0) {
+                return i;
+            }
+        }
+
+        return -1; // In case no number is missing, though this should not occur with valid input
     }
 };
