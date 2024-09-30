@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        int maxi = 0;
+        int len = num.size() - 1;
+
+        while (len >= 0) {
+            int d = num[len] - '0';
+            if (d % 2 != 0) {
+                return num.substr(0, len + 1);
+            }
+            len--;
+        }
+        return "";
+    }
+};
